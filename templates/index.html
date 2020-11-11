@@ -1,0 +1,30 @@
+<html lang="en">
+<html>
+    <head>
+        <title>{{ title }} Text Sentiment Analysis  </title> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1> Welcome to the Sentiment Analysis Application !</h1>
+        <div class="c1">
+        <a> Test the application</a>
+        <form  method="POST">
+            <textarea name="text1" placeholder="Enter some text to analyse ..." rows="12" cols="45"></textarea><br><br>
+            <div class="share-button">
+            <input class="example_a" type="submit" value="Submit" id="submit">
+            </div>
+        </form>
+        </div>
+        <div class="c2">
+        <a>Results</a> <br>
+             {% if final %}
+            <h2> The sentiment of '{{ text1 }}' is :</h2> {{ message }} <br><br>
+            <h2> Positivity: {{ positive }} %</h2> 
+            <h2> Neutrality: {{ neutral }} %</h2> 
+            <h2> Negativity: {{ negative }} %</h2> 
+            {% else %}
+            <p></p>
+            {% endif %}
+        </div>
+    </body>
+</html>
