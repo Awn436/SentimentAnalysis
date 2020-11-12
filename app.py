@@ -5,7 +5,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 
 set(stopwords.words('english'))
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/')
 def my_form():
@@ -21,18 +21,35 @@ def my_form_post():
     sia = SentimentIntensityAnalyzer()
     score = sia.polarity_scores(text=text1)
     compound = round((1 + score['compound'])/2, 2)
-    pos = round(score['pos'],2)
-    neu = round(score['neu'],2)
-    neg = round(score['neg'],2)
-    
+    pos = round(score['pos'],2) *100
+    neu = round(score['neu'],2) *100
+    neg = round(score['neg'],2) *100
     if neu>pos and neu>neg and neu>0.80:
        mes = "Neutral"
-    elif pos>neg:
+    elif pos>neg and pos>neu:
        mes = "Positive"
-    elif neg>pos:
+    elif neg>pos and neg>neu:
        mes = "Negative"
     
     return render_template('index.html', final=compound, text1=text1, negative=neg, positive=pos, neutral=neu, message=mes)
     
-if __name__ == "__main__":
+
+def score(text1):
+    sia = SentimentIntensityAnalyzer()
+    sc = sia.polarity_scores(text1)
+    compound = round((1 + sc['compound'])/2, 2)
+    pos = round(sc['pos'],2)
+    neu = round(sc['neu'],2)
+    neg = round(sc['neg'],2)
+    if neu>pos and neu>neg and neu>0.80:
+         Neu = print("Neutral")
+         return Neu
+    elif pos>neu and pos>neg:
+         Pos = print("Positive")
+         return Pos
+    elif neg>pos and neg>neu:
+         Neg = print("Negative")
+         return Neg
+
+if _name_ == "_name_":
     app.run(debug=True, host="127.0.0.1", port=5000, threaded=True)
