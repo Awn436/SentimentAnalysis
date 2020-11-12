@@ -6,6 +6,6 @@
 
 2. Run the docker image created: $ docker run -it -p 5000:5000 -d "docker image id" 
 
-3. Check that the container start: $ docker ps
+3. Check that the container is running: $ docker ps
 
 4. Go to the '0.0.0.0:5000'
